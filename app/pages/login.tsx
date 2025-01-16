@@ -1,18 +1,17 @@
 import { View, Text, Button, StyleSheet,TextInput } from "react-native";
 import { useRouter } from "expo-router";
 import React, { useState } from 'react';
-import { UserData } from '../types/userdata';
-
-const TEMP_USERNAME = "Admin";//for now
-const TEMP_PASSWORD = "123";
+import { useAppContext } from "../context/contextProvider"
 
 export default function Login() {
-  const router = useRouter();
+  const router = useRouter();/////////////////////
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [feedbackText, setFeedbackText] = useState('');
 
-  const allUsers = [
+  const { setActiveUser} = useAppContext()
+
+  const users = [
     {
       "Name": "Mr. Admin",
       "userName": "Admin",
@@ -34,10 +33,15 @@ export default function Login() {
   ];
 
   const tryLogin = () => {
-    console.log(allUsers);
     
-    if(username == TEMP_USERNAME && password == TEMP_PASSWORD){
+    const user = users.find(
+      (user) => user.userName === username && user.password === password
+    );
+    
+    if(user){
       setFeedbackText("Welcome!")
+      setActiveUser(user)
+      router.push("/pages/selectAppointment")
     }
     else{
       setFeedbackText("Username or passowrd are incorrect.")
@@ -60,7 +64,6 @@ export default function Login() {
       <Text>{feedbackText}</Text>
       
       <Button title="Login" onPress={tryLogin} />
-      {/* <Button title="Go to Home" onPress={() => router.push("/")} /> */}
     </View>
   );
 }
