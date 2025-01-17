@@ -1,4 +1,4 @@
-import { View, Text, Button, StyleSheet,TextInput } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet,TextInput } from "react-native";
 import { useRouter } from "expo-router";
 import React, { useState } from 'react';
 import { useAppContext } from "../context/contextProvider"
@@ -20,9 +20,9 @@ export default function Login(){
     );
     
     if(user){
-      setFeedbackText("Welcome!")
       setActiveUser(user)
       router.push("/pages/selectAppointment")
+      setFeedbackText("")
     }
     else{
       setFeedbackText("Username or passowrd are incorrect.")
@@ -41,10 +41,18 @@ export default function Login(){
       style={styles.textInput}
       value={password}
       onChangeText={setPassword}
-      />
-      <Text>{feedbackText}</Text>
-      
-      <Button title="Login" onPress={tryLogin} />
+      secureTextEntry={true}
+      />      
+      <TouchableOpacity
+      style={styles.button}
+        onPress={tryLogin}>
+      <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+
+      <Text
+      style = {styles.feedbackText}>
+        {feedbackText}
+      </Text>
     </View>
   );
 }
@@ -65,11 +73,31 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgrey',
     borderWidth: 1,
     borderColor: 'black',
-    width: 200,  // Adjustable width
-    height: 40,  // Adjustable height
+    width: 200,
+    height: 40,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    borderRadius: 3, // Optional: Adds rounded corners
-    marginBottom:10
-  }
+    borderRadius: 3,
+    marginBottom:10,
+    fontSize: 20
+  },
+  button: {
+    backgroundColor: "#5a7ca3",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 5,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  feedbackText: {
+    color: 'red',
+    fontSize: 20
+  },
 });

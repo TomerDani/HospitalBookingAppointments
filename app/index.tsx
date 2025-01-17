@@ -10,7 +10,7 @@ export default function App() {
         justifyContent: "center",
         alignItems: "center",
       }}>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>Homepage that need to get edited at some point.</Text>
       <Button 
         title="Go to Login" onPress={() => router.push("/pages/login")}
         color={'red'}

@@ -80,16 +80,19 @@ const styles = StyleSheet.create({
       color: "#444",
     },
     button: {
-        backgroundColor: "#007BFF",
+        backgroundColor: "#5a7ca3",
         paddingVertical: 8,
         paddingHorizontal: 16,
         borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop:10
       },
       buttonText: {
         color: "#fff",
         fontSize: 14,
         fontWeight: "bold",
-      },
+    },
     
   });
   
