@@ -2,35 +2,16 @@ import { View, Text, Button, StyleSheet,TextInput } from "react-native";
 import { useRouter } from "expo-router";
 import React, { useState } from 'react';
 import { useAppContext } from "../context/contextProvider"
+import { users } from "../dataHolders/dataHolder";
 
-export default function Login() {
-  const router = useRouter();/////////////////////
+export default function Login(){
+  const router = useRouter();
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [feedbackText, setFeedbackText] = useState('');
 
   const { setActiveUser} = useAppContext()
-
-  const users = [
-    {
-      "Name": "Mr. Admin",
-      "userName": "Admin",
-      "password": "123",
-      "userType": "Admin"
-    },
-    {
-      "Name": "Jane Smith",
-      "userName": "janesmith",
-      "password": "securepassword456",
-      "userType": "Worker"
-    },
-    {
-      "Name": "Tomer",
-      "userName": "TomerD",
-      "password": "tomertomer",
-      "userType": "User"
-    }
-  ];
 
   const tryLogin = () => {
     
