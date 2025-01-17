@@ -32,25 +32,27 @@ export default function Login(){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Please log in</Text>
+      <Text style={styles.inputLables}>Username</Text>
       <TextInput 
-      style={styles.textInput}
-      value={username}
-      onChangeText={setUsername}
+        style={styles.textInput}
+        value={username}
+        onChangeText={setUsername}
       />
+      <Text style={styles.inputLables}>Password</Text>
       <TextInput 
-      style={styles.textInput}
-      value={password}
-      onChangeText={setPassword}
-      secureTextEntry={true}
+        style={styles.textInput}
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry={true}
       />      
       <TouchableOpacity
-      style={styles.button}
+        style={styles.button}
         onPress={tryLogin}>
       <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
       <Text
-      style = {styles.feedbackText}>
+        style = {styles.feedbackText}>
         {feedbackText}
       </Text>
     </View>
@@ -67,6 +69,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+  inputLables: {
+    fontSize: 15,
+    fontWeight: "bold",
+    marginBottom: 2,
+    marginRight: 130,
+    alignItems: "flex-start"
   },
   textInput:
   {

@@ -2,8 +2,7 @@ import React, { useState } from "react"
 import { Text, View, Button, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 
 
-const onDoctorSelect = (item) => {}
-export const ServiceCard  = ({service}) => {
+export const ServiceCard  = ({service, serviceSelected}) => {
     const renderProfessors = ({ item }) => {
         return (
           <View style={styles.professorContainer}>
@@ -17,7 +16,7 @@ export const ServiceCard  = ({service}) => {
             </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => onDoctorSelect(item)}>
+          onPress={() => serviceSelected(service, item.name)}>
           <Text style={styles.buttonText}>Book Appointment</Text>
         </TouchableOpacity>
           </View>
