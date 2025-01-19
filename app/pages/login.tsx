@@ -50,7 +50,6 @@ export default function Login(){
         onPress={tryLogin}>
       <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-
       <Text
         style = {styles.feedbackText}>
         {feedbackText}

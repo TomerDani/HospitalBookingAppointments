@@ -14,9 +14,9 @@ export const ServiceCard  = ({service, serviceSelected}) => {
               Time Range: {item.schedule.timeRange.start} -{" "}
               {item.schedule.timeRange.end}
             </Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => serviceSelected(service, item.name)}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => serviceSelected(service, item.name)}>
           <Text style={styles.buttonText}>Book Appointment</Text>
         </TouchableOpacity>
           </View>
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "bold",
     },
-    
   });
   
   export default ServiceCard;
