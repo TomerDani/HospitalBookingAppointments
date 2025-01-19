@@ -1,75 +1,96 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Button } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import { useRouter } from 'expo-router';
 import { useSearchParams } from 'expo-router/build/hooks';
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-export default function ScheduleAppointment(params){
+export default function ScheduleAppointment(){
 
+    const router = useRouter();
     const searchParams = useSearchParams();
 
     const appointmentDetails = {
-        appointmentType: searchParams.get("appointmentType"),
+        type: searchParams.get("type"),
         professor: searchParams.get("professor"),
         description: searchParams.get("description"),
         price: searchParams.get("price"),
         duration: searchParams.get("duration"),
         location: searchParams.get("location"),
         schedule: JSON.parse(searchParams.get("schedule")),
-      };
-    
-    const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
-    const [startDate, endDate] = dateRange; 
+    };
 
-    //for testing
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
 
+    useEffect(() => {
+        setDate(new Date());
+        setTime(new Date());
+    }, []);
+
     const handleDateChange = (event, selectedDate) => {
         setShowDatePicker(false);
         if (selectedDate) setDate(selectedDate);
-      };
+    };
 
-      const handleTimeChange = (event, selectedTime) => {
+    const handleTimeChange = (event, selectedTime) => {
         setShowTimePicker(false);
         if (selectedTime) setTime(selectedTime);
-      };
+    };
+
+    const onConfirm = () => {
+        const appointment = {
+            date: `${date.getDate().toString().padStart(2, "0")}-${(date.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${date.getFullYear()}`,
+            time: `${time.getHours().toString().padStart(2, "0")}:${time
+            .getMinutes()
+            .toString()
+            .padStart(2, "0")}`,
+            type: searchParams.get("type"),
+            professor: searchParams.get("professor"),
+            description: searchParams.get("description"),
+            price: searchParams.get("price"),
+            duration: searchParams.get("duration"),
+            location: searchParams.get("location"),
+        };
+
+        router.push({
+            pathname: "/pages/summeriseAppointment",
+            params: appointment
+        });
+    }
 
 
     return(
         <View style={styles.container}>
             <Text style={styles.header}>Schedule an appointment</Text>
-            <Text style={styles.dataTitle}>Treatment type: {appointmentDetails.appointmentType}</Text>
+            <Text style={styles.dataTitle}>Treatment type: {appointmentDetails.type}</Text>
             <Text style={styles.dataTitle}>Professor name: {appointmentDetails.professor}</Text>
-            
-            <Text style={styles.displayDatetimeText}>
+                        
+            <TouchableOpacity style={styles.displayDatetimeButton} onPress={() => {setShowDatePicker(true)}}>
+            <Text style={styles.displayDatetimeButtonText}>
                 Selected date: {`${date.getDate().toString().padStart(2, "0")}-${(date.getMonth() + 1)
                 .toString()
                 .padStart(2, "0")}-${date.getFullYear()}`}
             </Text>
-                        
-            <TouchableOpacity style={styles.button} onPress={() => {setShowDatePicker(true)}}>
-                <Text style={styles.buttonText}>Pick a Date</Text>
-            </TouchableOpacity>
-                <Text style={styles.displayDatetimeText}>
+            </TouchableOpacity>  
+
+            <TouchableOpacity style={styles.displayDatetimeButton} onPress={() => {setShowTimePicker(true)}}>
+            <Text style={styles.displayDatetimeButtonText}>
                 Selected time: {`${time.getHours().toString().padStart(2, "0")}:${time
                 .getMinutes()
                 .toString()
                 .padStart(2, "0")}`}
             </Text>
-
-            <TouchableOpacity style={styles.button} onPress={() => {setShowTimePicker(true)}}>
-                <Text style={styles.buttonText}>Pick a Time</Text>
             </TouchableOpacity>
 
             {showDatePicker && <DateTimePicker
                 value={date}
                 mode="date"
                 display="default"
-                minimumDate={new Date(2025, 0, 1)}
-                maximumDate={new Date(2025, 11, 11)}
+                minimumDate={new Date()}
                 onChange={handleDateChange}
             />}
             {showTimePicker && (
@@ -78,16 +99,12 @@ export default function ScheduleAppointment(params){
                 mode="time"
                 display="default"
                 onChange={handleTimeChange}
+                minimumDate={new Date()}
             />)}
 
-            {/* <Text>HIIIIIIIIII</Text>
-            <Text>{appointmentDetails.appointmentType}</Text>
-            <Text>{appointmentDetails.professor}</Text>
-            <Text>{appointmentDetails.description}</Text>
-            <Text>{appointmentDetails.price}</Text>
-            <Text>{appointmentDetails.duration}</Text>
-            <Text>{appointmentDetails.location}</Text>
-            <Text>{appointmentDetails.schedule.weekdays}</Text> */}
+            <TouchableOpacity style={styles.confirmButton} onPress={onConfirm}>
+                <Text style={styles.confirmButtonText}>Confirm</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -108,34 +125,39 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 12, 
     },
-    label: {
-        fontSize: 18,
-        marginBottom: 8,
-        fontWeight: "bold",
-      },
-      displayDatetimeText: {
-        fontSize: 16,
-        marginBottom: 0,
-        color: "#333",
-        padding: 10,
+    displayDatetimeButton: {
+        marginBottom: 7,
+        padding: 12,
         borderWidth: 1,
         borderColor: "#ddd",
-        borderRadius: 5,
-        backgroundColor: "#fff",
-        textAlign: "center",
+        borderRadius: 8,
+        backgroundColor: "#789bc2",
+        alignItems: "center",
+        justifyContent: "center",
         width: "60%",
-      },
-      button: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.25,
+        shadowRadius: 6,
+        elevation: 5, 
+    },
+    displayDatetimeButtonText: {
+        color: "#fff", // Text color to contrast with button
+        fontWeight: "bold",
+        fontSize: 16,
+        textAlign: "center",
+    },
+    confirmButton: {
         backgroundColor: "#5a7ca3",
         padding: 12,
         borderRadius: 8,
-        marginVertical: 8,
         width: "60%",
         alignItems: "center",
-      },
-      buttonText: {
+        marginTop: 20,
+    },
+    confirmButtonText: {
         color: "#fff",
         fontSize: 16,
         fontWeight: "bold",
-      },  
+    }, 
 })

@@ -5,10 +5,7 @@ import { ServiceCard  } from '../components/serviceCard';
 import { availableAppointments } from '../dataHolders/dataHolder';
 import { useRouter } from "expo-router";
 
-const Appointments = []
-
-
-export default function SelectAppointment() {
+export default function SelectAppointment(){
     const { activeUser } = useAppContext()
     const router = useRouter();
 
@@ -16,19 +13,21 @@ export default function SelectAppointment() {
         const selectedProfessor = service.professors.find(
             (professor) => professor.name === professorName
         );
+
+        const selectedAppointment = {
+            type: service.type,
+            professor: selectedProfessor.name,
+            description: service.description,
+            price: service.price,
+            duration: service.duration,
+            location: service.location,
+            schedule: JSON.stringify(selectedProfessor.schedule),
+        }
     
         router.push({
             pathname: "/pages/scheduleAppointment",
-            params: {
-              appointmentType: service.type,
-              professor: selectedProfessor.name,
-              description: service.description,
-              price: service.price,
-              duration: service.duration,
-              location: service.location,
-              schedule: JSON.stringify(selectedProfessor.schedule),
-            },
-          });
+            params: selectedAppointment
+        });
     }
 
     return(

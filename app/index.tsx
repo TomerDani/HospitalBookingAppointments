@@ -1,16 +1,11 @@
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 
 export default function App() {
   const router = useRouter();
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
-      <Text>Homepage that need to get edited at some point.</Text>
+    <View style={styles.container}>
+      <Text>Welcome to Heba!.</Text>
       <Button 
         title="Go to Login" onPress={() => router.push("/pages/login")}
         color={'red'}
@@ -18,3 +13,11 @@ export default function App() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+})
