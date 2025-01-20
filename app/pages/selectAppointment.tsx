@@ -37,7 +37,6 @@ export default function SelectAppointment(){
                 keyExtractor={(item) => item.type}
                 renderItem={({ item }) => <ServiceCard service={item} serviceSelected={serviceSelected} />}
             />
-            <Text>Welcome to the order page {activeUser ? activeUser.Name : "NoUserActive"}!</Text>
         </View>
     )
 }

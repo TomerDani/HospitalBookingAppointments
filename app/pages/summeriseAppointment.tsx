@@ -23,19 +23,37 @@ export default function SummeriseAppointment(){
         router.push("/pages/selectAppointment")
     }
     const onReturnHomePress= () => {
-        router.push("../index")
+        router.push("/")
     }
 
     return(
         <View style={styles.container}>
-               
             <Text style={styles.header}>Appointment sceduled!</Text>
-            <View style={styles.detailsBox}> 
-                <Text style={styles.detailsData}>Treatment type: {appointmentDetails.type}</Text>
-                <Text style={styles.detailsData}>professor name: {appointmentDetails.professor}</Text>
-                <Text style={styles.detailsData}>Treatmeat duration: {appointmentDetails.duration}</Text>
-                <Text style={styles.detailsData}>Location: {appointmentDetails.location}</Text>
-                <Text style={styles.detailsData}>At: {appointmentDetails.date}, {appointmentDetails.time}</Text>
+            <View style={styles.detailsBox}>
+                <Text style={styles.detailsData}>
+                    <Text style={styles.boldText}>Treatment type: </Text>
+                    {appointmentDetails.type}
+                </Text>
+                <Text style={styles.detailsData}>
+                    <Text style={styles.boldText}>Professor name:: </Text>
+                    {appointmentDetails.professor}
+                </Text>
+                <Text style={styles.detailsData}>
+                    <Text style={styles.boldText}>Duration: </Text>
+                    {appointmentDetails.duration}
+                </Text>
+                <Text style={styles.detailsData}>
+                    <Text style={styles.boldText}>Location: </Text>
+                    {appointmentDetails.location}
+                </Text>
+                <Text style={styles.detailsData}>
+                    <Text style={styles.boldText}>At: </Text>
+                    {appointmentDetails.date}, {appointmentDetails.time}
+                </Text>
+                <Text style={styles.detailsData}>
+                    <Text style={styles.boldText}>Price: </Text>
+                    {appointmentDetails.price}₪
+                </Text>
             </View>
 
             <TouchableOpacity style={styles.button} onPress={onAnotherAppointmentPress}>
@@ -70,14 +88,13 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         elevation: 3,
         marginBottom: 20,
-        alignItems: "center",
         justifyContent: "center",
     },
     detailsData: {
         fontSize: 18,
     },
     button: {
-        backgroundColor: "#5a7ca3",
+        backgroundColor: "#3c8385",
         padding: 12,
         borderRadius: 8,
         width: "80%",
@@ -87,6 +104,9 @@ const styles = StyleSheet.create({
     confirmButtonText: {
         color: "#fff",
         fontSize: 18,
+        fontWeight: "bold",
+    },
+    boldText: {
         fontWeight: "bold",
     },
 })

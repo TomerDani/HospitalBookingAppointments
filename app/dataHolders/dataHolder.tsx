@@ -1,18 +1,18 @@
 export const users = [
     {
-      "Name": "Mr. Admin",
+      "name": "Mr. Admin",
       "userName": "Admin",
       "password": "123",
       "userType": "Admin"
     },
     {
-      "Name": "Jane Smith",
+      "name": "Jane Smith",
       "userName": "janesmith",
       "password": "securepassword456",
       "userType": "Worker"
     },
     {
-      "Name": "Tomer",
+      "name": "Tomer",
       "userName": "TomerD",
       "password": "tomertomer",
       "userType": "User"

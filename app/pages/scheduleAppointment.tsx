@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#ddd",
         borderRadius: 8,
-        backgroundColor: "#789bc2",
+        backgroundColor: "#609fa1",
         alignItems: "center",
         justifyContent: "center",
         width: "60%",
@@ -142,13 +142,13 @@ const styles = StyleSheet.create({
         elevation: 5, 
     },
     displayDatetimeButtonText: {
-        color: "#fff", // Text color to contrast with button
+        color: "#fff",
         fontWeight: "bold",
         fontSize: 16,
         textAlign: "center",
     },
     confirmButton: {
-        backgroundColor: "#5a7ca3",
+        backgroundColor: "#3c8385",
         padding: 12,
         borderRadius: 8,
         width: "60%",

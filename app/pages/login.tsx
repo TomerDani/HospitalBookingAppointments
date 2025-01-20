@@ -21,7 +21,7 @@ export default function Login(){
     
     if(user){
       setActiveUser(user)
-      router.push("/pages/selectAppointment")
+      router.push("/")
       setFeedbackText("")
     }
     else{
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   button: {
-    backgroundColor: "#5a7ca3",
+    backgroundColor: "#3c8385",
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 8,
