@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import { useSearchParams } from 'expo-router/build/hooks';
 import { useRouter } from "expo-router";
+import { useAppContext } from "../context/contextProvider"
 
 export default function SummeriseAppointment(){
+
+    const { setHeaderText } = useAppContext()
 
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -18,6 +21,10 @@ export default function SummeriseAppointment(){
         date: searchParams.get("date"),
         time: searchParams.get("time"),
     };
+
+    useEffect(() => {
+        setHeaderText("Appointment summery")
+    }, []);
 
     const onAnotherAppointmentPress = () => {
         router.push("/pages/selectAppointment")

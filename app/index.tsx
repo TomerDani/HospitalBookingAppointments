@@ -1,10 +1,15 @@
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { useAppContext } from "./context/contextProvider";
+import { useEffect } from "react";
 
 export default function App() {
   const router = useRouter();
-  const { activeUser} = useAppContext()
+  const { activeUser, setHeaderText} = useAppContext()
+
+  useEffect(() => {
+    setHeaderText("Main screen")
+  },[]);
 
   const onLoginress = () => {    
     router.push("/pages/login");
@@ -15,13 +20,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-       <Image source={require("../assets/images/HebaIcon.png")}
-        style={styles.image}
-      />
+       <View style={styles.imageContainer}>
+        <Image source={require("../assets/images/HebaIcon.png")} style={styles.image} />
+      </View>
       <Text style={styles.header}>Welcome to Heba!</Text>
       {activeUser == null ? 
       (<TouchableOpacity style={styles.button} onPress={onLoginress}>
-        <Text style={styles.buttonText}>Go to login</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>)
       :
       (
@@ -41,6 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    bottom: 50,
   },
   header: {
     fontSize: 30,
@@ -59,15 +65,22 @@ const styles = StyleSheet.create({
     width: "50%",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 15,
   },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
   },
+  imageContainer: {
+    position: "relative",
+    width: "100%",
+    alignItems: "center",
+  },
   image: {
     width: 200,
     height: 200,
-    marginBottom: 10
+    position: "relative",
+    bottom: 35,
   },
 })

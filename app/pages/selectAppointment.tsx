@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from "../context/contextProvider"
-import { Text, View, Button, StyleSheet, FlatList } from "react-native";
+import {  View, StyleSheet, FlatList } from "react-native";
 import { ServiceCard  } from '../components/serviceCard';
 import { availableAppointments } from '../dataHolders/dataHolder';
 import { useRouter } from "expo-router";
 
+
 export default function SelectAppointment(){
-    const { activeUser } = useAppContext()
+    
+    const { setHeaderText } = useAppContext()
     const router = useRouter();
+
+    useEffect(() => {
+        setHeaderText("Select appointment")
+    }, []);
 
     const serviceSelected = (service, professorName) => {
         const selectedProfessor = service.professors.find(

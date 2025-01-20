@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import { useRouter } from 'expo-router';
 import { useSearchParams } from 'expo-router/build/hooks';
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useAppContext } from "../context/contextProvider"
 
 export default function ScheduleAppointment(){
 
@@ -24,7 +25,11 @@ export default function ScheduleAppointment(){
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
 
+    const { setHeaderText} = useAppContext()
+
+
     useEffect(() => {
+        setHeaderText("Schedule appointment")
         setDate(new Date());
         setTime(new Date());
     }, []);
@@ -116,12 +121,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     header: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: "bold",
         marginBottom: 16, 
     },
     dataTitle: {
-        fontSize: 17,
+        fontSize: 20,
         fontWeight: "bold",
         marginBottom: 12, 
     },

@@ -1,27 +1,42 @@
 import { Stack } from "expo-router";
-import { View, Image, Text, StyleSheet } from "react-native";
-import { ContextProvider } from "./context/contextProvider" 
-import Login from "./pages/login";
+import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { ContextProvider, useAppContext } from "./context/contextProvider" 
+import { useRouter } from "expo-router";
 
-export default function RootLayout() {
+const AppLayout = () => {
+  const router = useRouter();
+  const { headerText } = useAppContext();
+
+  const routeToHome = () => {
+    router.push("/");
+  }
+
   return (
-    <ContextProvider>
       <Stack
         screenOptions={{
         headerShown: true,
         header: () => (
           <View style={styles.headerContainer}>
-            <Text style={styles.textStyle}>Heba</Text>
-            <Image
-              source={require("../assets/images/HebaIcon.png")}
-              style={styles.imageStyle}
-            />
+            <Text style={styles.textStyle}>Heba - {headerText}</Text>
+            <TouchableOpacity onPress={routeToHome}>
+              <Image
+                source={require("../assets/images/HebaIcon.png")}
+                style={styles.imageStyle}
+              />
+            </TouchableOpacity>   
           </View>
         )}}>
       </Stack>
-    </ContextProvider>
   );
 }
+
+const RootLayout = () => (
+  <ContextProvider>
+    <AppLayout />
+  </ContextProvider>
+);
+
+export default RootLayout;
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -33,7 +48,7 @@ const styles = StyleSheet.create({
   },
   textStyle:{
     color: "#black",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10
   },

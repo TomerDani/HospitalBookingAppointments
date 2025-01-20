@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet,TextInput } from "react-native";
 import { useRouter } from "expo-router";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppContext } from "../context/contextProvider"
 import { users } from "../dataHolders/dataHolder";
 
@@ -11,7 +11,11 @@ export default function Login(){
   const [password, setPassword] = useState('');
   const [feedbackText, setFeedbackText] = useState('');
 
-  const { setActiveUser} = useAppContext()
+  const { setActiveUser,setHeaderText} = useAppContext()
+
+  useEffect(() => {
+    setHeaderText("Login screen")
+  },[]);
 
   const tryLogin = () => {
     
