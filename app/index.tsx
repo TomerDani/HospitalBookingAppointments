@@ -10,7 +10,6 @@ export default function App() {
     router.push("/pages/login");
   }
   const onSelectAppointmentPress = () => {
-    console.log(activeUser);
     router.push("/pages/selectAppointment");
   }
 
@@ -69,5 +68,6 @@ const styles = StyleSheet.create({
   image: {
     width: 200,
     height: 200,
-    marginBottom: 10,},
+    marginBottom: 10
+  },
 })
